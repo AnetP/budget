@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+
+{% if user.is_authenticated %}
+
+Twój stan konta to : {{ balance }}
+
+
+
+ {% else %}
+ 
+ Witaj użytkowniku! 
+ <br>
+ <br>
+ Proszę zaloguj się lub zarejestruj w systemie by w pełni móc korzystać z jego funkcjonalności.
+
+
+
+ {% endif %}
+
+
+
+
+{% endblock %}

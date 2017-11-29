@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <title>Budżet domowy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-responsive.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+    <link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  
+
+</head>
+ 
+<body>
+
+<div class="container" id="wrapper">
+
+    <div class="row">
+        <div class="topbar">
+            <div class="logo pull-left">
+                <h1><a href="#"><img src="{% static 'img/Ap.png' %}" width="20%"></a></h1>
+            </div>
+            <div align="right">
+
+    {% if user.is_authenticated %}
+   
+    <p>Jesteś zalogowany jako {{ user.username }}</p>
+
+     <a href="/accounts/logout/">Wyloguj</a>
+    {% else %}
+    <a href="/accounts/login/">Logowanie</a> | <a href="/accounts/register/">Rejestracja</a>
+    {% endif %}
+
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="row"><!-- Menu -->
+        <div id="mainmenu" class="navbar navbar-inverse"> 
+                <div class="navbar-inner">
+                    <div>
+                        <a class="brand" href="/home">Strona główna</a>
+
+                        {% if user.is_authenticated %}
+                        
+                            <ul class="nav">
+                                <li><a href="/incomes/">Przychody</a></li>
+                                <li><a href="/expenses/">Wydatki</a></li>
+                    
+                         {% endif %}
+                     
+
+
+
+                        
+                           
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="span9 left_col">
+           
+
+            <div class="row">
+
+                {% block content %}
+                {% endblock %}
+
+            </div>
+
+        </div>
+
+
+  {% if user.is_authenticated %}
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                  
+
+                     <li class="nav-header">Skrót</li>
+                         <li class="add_p"><a href="/incomes/add/">Dodaj przychód</a></li>
+                         <li class="add_w"><a href="/expenses/add/">Dodaj wydatek</a></li>
+                   
+                    
+
+                     
+
+                 </ul>
+            </div>
+        </div>
+   
+                   
+        
+   {% endif %}
+
+
+    </div>
+
+
+    <div class="row">
+            <hr>
+            <div class="footer-wrap">
+               Created by Aneta Powarzyńska
+                <br>
+               <img src="{% static 'img/email.png' %}" width=25%>
+
+            </div>
+        </div>
+
+   
+
+</div>
+
+</body> 
+
+</html>
